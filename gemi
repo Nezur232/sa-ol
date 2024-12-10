@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+
+const int SATIR = 10, SUTUN = 10;
+
+struct Gemi {
+    int x, y;
+    bool batdi;
+};
+
+char taxta[SATIR][SUTUN];
+Gemi gemi;
+
+void taxtaniGoster() {
+    for (int i = 0; i < SATIR; i++, cout << endl)
+        for (int j = 0; j < SUTUN; j++)
+            cout << taxta[i][j] << " ";
+}
+
+bool koordinatDogrudurmu(int x, int y) {
+    return x >= 0 && x < SATIR && y >= 0 && y < SUTUN;
+}
+
+bool atesAc(int x, int y) {
+    if (taxta[x][y] == 'O') {
+        cout << "Vuruldun!" << endl;
+        taxta[x][y] = 'X';
+        gemi.batdi = true;
+        return true;
+    }
+    cout << "Yanlis hedef!" << endl;
+    taxta[x][y] = '*';
+    return false;
+}
+
+void gemiYerlestir() {
+    gemi = {4, 7, false};
+    taxta[gemi.x][gemi.y] = 'O';
+}
+
+int main() {
+    for (int i = 0; i < SATIR; i++)
+        for (int j = 0; j < SUTUN; j++)
+            taxta[i][j] = '~';
+
+    gemiYerlestir();
+
+    while (true) {
+        taxtaniGoster();
+        int x, y;
+        cout << "Ates etmek istediyiniz koordinatlari daxil edin (satir sutun): ";
+        cin >> x >> y;
+
+        if (!koordinatDogrudurmu(x, y)) {
+            cout << "Yanlis koordinatlar! 0 ile " << SATIR - 1 << " arasinda bir deyer daxil edin." << endl;
+            continue;
+        }
+
+        if (atesAc(x, y) && gemi.batdi) {
+            cout << "Butun gemiler batdi! Oyun bitdi." << endl;
+            break;
+        }
+    }
+
+    return 0;
+}
