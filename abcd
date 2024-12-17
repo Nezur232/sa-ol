@@ -1,0 +1,17 @@
+include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string s = "abcd"; 
+ string
+    
+    cout << s << endl;
+    swap(s[1], s[2]); cout << s << endl;
+    swap(s[0], s[1]); cout << s << endl;
+    swap(s[2], s[3]); cout << s << endl;
+    swap(s[0], s[3]); cout << s << endl;
+    swap(s[1], s[3]); cout << s << endl;
+
+    return 0;
+}
